@@ -1,130 +1,286 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>当選しました</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OFFICIAL NOTICE</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+      background:
+        radial-gradient(circle at top, #173266 0%, #08152f 45%, #050d1f 100%);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 16px;
+      overflow: hidden;
+    }
 
-body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 24px 16px;
-  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
-  background:
-    radial-gradient(circle at top, #173266 0%, #08152f 45%, #050d1f 100%);
-  color: #fff;
-}
+    .wrap {
+      width: 100%;
+      max-width: 430px;
+    }
 
-.wrap {
-  width: 100%;
-  max-width: 420px;
-}
+    .card {
+      background: linear-gradient(180deg, rgba(8, 21, 56, 0.96), rgba(8, 18, 46, 0.98));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 28px 22px 26px;
+      text-align: center;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+      position: relative;
+      overflow: hidden;
+    }
 
-.card {
-  background: linear-gradient(180deg, rgba(9,24,63,0.97), rgba(8,18,46,0.98));
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 28px;
-  padding: 28px 22px 26px;
-  text-align: center;
-  box-shadow: 0 18px 50px rgba(0,0,0,0.45);
-}
+    .label {
+      display: inline-block;
+      background: #d7b45e;
+      color: #1f2747;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+    }
 
-.label {
-  display: inline-block;
-  background: #d7b45e;
-  color: #1f2747;
-  font-size: 13px;
-  font-weight: 800;
-  padding: 10px 20px;
-  border-radius: 10px;
-  margin-bottom: 24px;
-}
+    .title {
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
 
-.title {
-  color: #e2bc53;
-  font-size: 21px;
-  font-weight: 800;
-  margin-bottom: 18px;
-}
+    .badge {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
 
-.badge {
-  display: inline-block;
-  padding: 10px 20px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  font-size: 14px;
-  margin-bottom: 30px;
-}
+    .count-stage {
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-.amount {
-  font-size: 60px;
-  font-weight: 900;
-  color: #fff;
-  text-shadow: 0 0 22px rgba(255,255,255,0.24);
-  margin-bottom: 28px;
-}
+    .count-value {
+      font-size: 110px;
+      font-weight: 900;
+      color: #dcbc43;
+      text-shadow: 0 0 26px rgba(220,188,67,0.32);
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity .25s ease, transform .25s ease;
+    }
 
-.desc {
-  font-size: 16px;
-  line-height: 1.8;
-  margin-bottom: 30px;
-}
+    .count-sub {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.86);
+      margin-top: 8px;
+    }
 
-.btn {
-  display: block;
-  width: 100%;
-  text-decoration: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 900;
-  border-radius: 22px;
-  padding: 20px;
-  background: linear-gradient(120deg, #08c955, #15d85f, #94f3ba);
-  box-shadow: 0 0 26px rgba(16,217,94,0.28);
-}
+    .final-stage {
+      display: none;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .45s ease, transform .45s ease;
+    }
 
-.note {
-  font-size: 12px;
-  margin-top: 15px;
-  opacity: 0.6;
-}
-</style>
+    .final-stage.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .final-title {
+      color: #dcbc43;
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .amount {
+      font-size: 60px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      text-shadow: 0 0 22px rgba(255,255,255,0.24);
+      margin-bottom: 28px;
+    }
+
+    .desc {
+      font-size: 16px;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+      border-radius: 22px;
+      padding: 22px 16px;
+      background: linear-gradient(135deg, #06C755, #00B900);
+      box-shadow: 0 0 28px rgba(6,199,85,0.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn small {
+      display: block;
+      margin-top: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.38) 50%,
+        rgba(255,255,255,0) 100%
+      );
+      transform: skewX(-25deg);
+      animation: shine 2.4s infinite;
+    }
+
+    .note {
+      margin-top: 16px;
+      font-size: 12px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.42);
+    }
+
+    @keyframes shine {
+      0% { left: -75%; }
+      100% { left: 125%; }
+    }
+
+    @media (max-width: 480px) {
+      .amount {
+        font-size: 52px;
+      }
+
+      .count-value {
+        font-size: 96px;
+      }
+
+      .desc {
+        font-size: 15px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-<div class="wrap">
-  <div class="card">
+  <div class="wrap">
+    <div class="card">
+      <div class="label">OFFICIAL NOTICE</div>
 
-    <div class="label">OFFICIAL NOTICE</div>
+      <div id="countStage" class="count-stage">
+        <div class="title">エントリー情報を照合中...</div>
+        <div id="countValue" class="count-value">3</div>
+        <div id="countSub" class="count-sub">確認が完了するまで、そのままお待ちください。</div>
+      </div>
 
-    <div class="title">🎉 キャンペーン詳細のご案内</div>
+      <div id="finalStage" class="final-stage">
+        <div class="final-title">🎉 ♡♡♡♡♡♡♡♡♡♡♡♡</div>
 
-    <div class="badge">20歳以上限定キャンペーン</div>
+        <div class="badge">20歳以上限定特典</div>
 
-    <div class="amount">350,000円</div>
+        <div class="amount">350,000円</div>
 
-    <div class="desc">
-      期限が迫っています。<br>
+        <div class="desc">
+          ♡♡♡♡♡♡♡♡♡♡♡♡♡。<br>
+          本日の特典受け取り♡♡♡♡♡♡♡♡。<br>
+          下記より公式LINEを追加して申請してください。
+        </div>
+
+        <a
+          href="https://lin.ee/あなたのURL"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn"
+        >
+          今すぐ特典を受け取る
+          <small>公式LINE追加画面が開きます</small>
+        </a>
+
+        <div class="note">
+          ※本通知はシステムのご案内により配信されています。<br>
+          一定時間を過ぎますと表示が切り替わる場合がございます。
+        </div>
+      </div>
     </div>
-
-    <!-- 🔥ここだけ自分のLINEに変える -->
-    <a href="https://lin.ee/あなたのURL"
-       target="_blank"
-       class="btn">
-      今すぐ詳細を確認する
-    </a>
-
-    <div class="note">
-      ※詳細は公式LINEにてご案内しています
-    </div>
-
   </div>
-</div>
+
+  <script>
+    const countStage = document.getElementById('countStage');
+    const countValue = document.getElementById('countValue');
+    const countSub = document.getElementById('countSub');
+    const finalStage = document.getElementById('finalStage');
+
+    const steps = ['3', '2', '1', '♡'];
+    let i = 0;
+
+    function nextStep() {
+      countValue.style.opacity = '0';
+      countValue.style.transform = 'scale(0.88)';
+
+      setTimeout(() => {
+        i++;
+
+        if (i < steps.length) {
+          countValue.textContent = steps[i];
+          countValue.style.opacity = '1';
+          countValue.style.transform = 'scale(1)';
+
+          if (steps[i] === '♡') {
+            countSub.innerHTML = '最終画面へ移動します。';
+            setTimeout(showFinalStage, 900);
+            return;
+          }
+
+          setTimeout(nextStep, 850);
+        }
+      }, 220);
+    }
+
+    function showFinalStage() {
+      countStage.style.display = 'none';
+      finalStage.classList.add('show');
+    }
+
+    setTimeout(nextStep, 900);
+  </script>
 </body>
 </html>
